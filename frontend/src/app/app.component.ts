@@ -5,6 +5,16 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
-  title = 'frontend';
+  count: number = 0
+
+  addCount(){
+    this.count = this.count + 1
+  }
+  minCount(){
+    if(this.count > 0){
+      this.count = this.count - 1
+    }
+  }
 }
