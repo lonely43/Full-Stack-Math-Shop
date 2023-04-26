@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { LocalItemsDTO } from './list-items/item.model';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +8,11 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  count: number = 0
+  itemsLocal: LocalItemsDTO[];
 
-  addCount(){
-    this.count = this.count + 1
-  }
-  minCount(){
-    if(this.count > 0){
-      this.count = this.count - 1
-    }
+  @ViewChild("cart") cart: ElementRef
+  showCart(){
+    console.log(this.cart)
+    this.cart.nativeElement.classList.toggle("showCart")
   }
 }

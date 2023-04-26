@@ -1,0 +1,26 @@
+<div class="main">
+   <div class="labelItems">
+      <div class="info">
+         <div class="label1">
+
+         </div>
+         <div class="label2">
+            
+         </div>
+         <div class="label3">
+            
+         </div>
+      </div>
+   </div>
+   <div class="bodyItems">
+      <div *ngFor="let item of items" class="item">
+         <div class="labelItem">
+            <img src="../../assets/luxury-shop.png" width="200" height="200" alt="icon">
+         </div>
+         <div class="bodyItem">
+            <h1> {{item.title}} </h1>
+            <p> {{item.description}} </p>
+         </div>
+      </div>
+   </div>
+</div>
