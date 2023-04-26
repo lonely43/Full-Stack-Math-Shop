@@ -1,11 +1,7 @@
 export interface ItemsDTO{
+   id:number,
    title: string,
    description: string,
-   icon: string,
-}
-export interface LocalItemsDTO{
-   title: string,
-   description: string,
-   icon: string,
-   amount: number,
+   icon?: string,
+   amount?: number
 }

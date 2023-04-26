@@ -27,7 +27,6 @@
          min-height: 18rem;
 
          background-color: rgb(255, 255, 255);
-        //box-shadow: 0rem 0rem 0.2rem 0.01rem black;
          border: 0.125rem solid rgb(222, 222, 222);
          border-radius: 1rem;
 
@@ -49,6 +48,7 @@
             align-content: center;
             justify-content: center;
             text-align: center;
+            gap: 1rem;
          }
       }
    }
