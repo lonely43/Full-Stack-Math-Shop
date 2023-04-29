@@ -21,31 +21,47 @@ export class AppComponent implements OnInit {
   updateLocalCart(){
     this.values = JSON.parse(localStorage.getItem("cart"))
     if(!this.values || this.values.length <= 0){
-      console.log(1)
       this.voidCart = "You didn't choose anything"
     }
     else{
-      this.voidCart = ""
+      this.voidCart = null
     }
     this.items = this.values.map(i => this.appService.getOne(i))
   }
 
   addToCartOne(id: number){
-    this.values.push(id)
-    localStorage.setItem("cart", JSON.stringify(this.values))
+    if(this.values.some(ids => ids == id))
+    {
+      this.items.filter(i =>{ 
+        if(i.id == id)
+          {
+            i.amount += 1
+          }})
+    }
+    else{
+      this.values.push(id)
+      localStorage.setItem("cart", JSON.stringify(this.values))
+    }
     this.updateLocalCart()
   }
 
   minToCartOne(id: number){
-    const index = this.values.findIndex(i => i === id)
-    this.values = this.values.filter((_ , i) => i !== index)
-    localStorage.setItem("cart", JSON.stringify(this.values))
+    const item = this.items.find(e => e.id == id)
+    if(
+      item.amount <= 0
+    ){
+      const index = this.values.findIndex(i => i === id)
+      this.values = this.values.filter((_ , i) => i !== index)
+      localStorage.setItem("cart", JSON.stringify(this.values))
+    }
+    else{
+      this.items.map(item => { if(item.id == id){item.amount -= 1} })
+    }
     this.updateLocalCart()
   }
 
   @ViewChild("cart") cart: ElementRef
   showCart(){
-    console.log(this.cart)
     this.cart.nativeElement.classList.toggle("showCart")
   }
 }

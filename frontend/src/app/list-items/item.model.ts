@@ -3,5 +3,5 @@ export interface ItemsDTO{
    title: string,
    description: string,
    icon?: string,
-   amount?: number
+   amount?: number,
 }

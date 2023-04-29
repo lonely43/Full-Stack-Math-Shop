@@ -15,7 +15,8 @@ export class ListItemsComponent {
     this.items = appService.getItems()
   }
   addToCartOne(id: number){
-    localStorage.setItem("cart", JSON.stringify([...JSON.parse(localStorage.getItem("cart")?? "[]"), id]))
+   // localStorage.setItem("cart", JSON.stringify([...JSON.parse(localStorage.getItem("cart")?? "[]"), id]))
+    this.appComponent.addToCartOne(id)
     this.appComponent.updateLocalCart()
   }
 }
