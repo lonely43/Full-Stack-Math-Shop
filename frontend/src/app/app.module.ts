@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListItemsComponent } from './list-items/list-items.component';
 import { AppService } from './app.service';
+import { PayPageComponent } from './pay-page/pay-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListItemsComponent
+    ListItemsComponent,
+    PayPageComponent
   ],
   imports: [
     BrowserModule,

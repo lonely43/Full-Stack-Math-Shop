@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ItemsDTO } from './list-items/item.model';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ItemsDTO, LocalValues } from './list-items/item.model';
 import { AppService } from './app.service';
 
 @Component({
@@ -8,13 +8,14 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   constructor(private appService: AppService){}
   items: ItemsDTO[];
-  values: number[];
+  values: LocalValues[];
   voidCart: string = null;
+  @ViewChild("payBtn") payButton: ElementRef
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.updateLocalCart()
   }
 
@@ -22,24 +23,28 @@ export class AppComponent implements OnInit {
     this.values = JSON.parse(localStorage.getItem("cart"))
     if(!this.values || this.values.length <= 0){
       this.voidCart = "You didn't choose anything"
+      this.payButton.nativeElement.style.display = "none"
     }
     else{
       this.voidCart = null
+      this.payButton.nativeElement.style.display = "flex"
     }
-    this.items = this.values.map(i => this.appService.getOne(i))
+    this.items = this.values.map(i => this.appService.getOne(i.id, i.amount))
   }
 
   addToCartOne(id: number){
-    if(this.values.some(ids => ids == id))
+    if(this.values.some(i => i.id == id))
     {
-      this.items.filter(i =>{ 
+      this.values.filter(i =>{ 
         if(i.id == id)
           {
             i.amount += 1
           }})
+          localStorage.setItem("cart", JSON.stringify(this.values))
     }
     else{
-      this.values.push(id)
+      const item = {id: id, amount: 0}
+      this.values.push(item)
       localStorage.setItem("cart", JSON.stringify(this.values))
     }
     this.updateLocalCart()
@@ -50,12 +55,13 @@ export class AppComponent implements OnInit {
     if(
       item.amount <= 0
     ){
-      const index = this.values.findIndex(i => i === id)
+      const index = this.values.findIndex(i => i.id === id)
       this.values = this.values.filter((_ , i) => i !== index)
       localStorage.setItem("cart", JSON.stringify(this.values))
     }
     else{
-      this.items.map(item => { if(item.id == id){item.amount -= 1} })
+      this.values.map(i => { if(i.id == id){i.amount -= 1} })
+      localStorage.setItem("cart", JSON.stringify(this.values))
     }
     this.updateLocalCart()
   }

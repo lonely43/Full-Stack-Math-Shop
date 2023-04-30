@@ -8,7 +8,7 @@ export class AppService {
   items: ItemsDTO[] = [
     {
       id: 1,
-      title: "triangle",
+      title: "Triangle",
       description: "Very interesting and cool triangle",
       icon: "triangle.png",
       amount: 0
@@ -54,7 +54,9 @@ export class AppService {
     return this.items
   }
   
-  getOne(id: number){
-    return this.items.find((e) => e.id === id)
+  getOne(id: number, amount:number){
+    let item = this.items.find((e) => e.id === id)
+    item.amount = amount
+    return item
   }
 }
