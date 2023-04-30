@@ -43,6 +43,7 @@ export class AppComponent implements AfterViewInit {
           localStorage.setItem("cart", JSON.stringify(this.values))
     }
     else{
+      setTimeout
       const item = {id: id, amount: 0}
       this.values.push(item)
       localStorage.setItem("cart", JSON.stringify(this.values))
@@ -50,14 +51,17 @@ export class AppComponent implements AfterViewInit {
     this.updateLocalCart()
   }
 
-  minToCartOne(id: number){
+  async minToCartOne(id: number, element){
     const item = this.items.find(e => e.id == id)
-    if(
-      item.amount <= 0
-    ){
-      const index = this.values.findIndex(i => i.id === id)
-      this.values = this.values.filter((_ , i) => i !== index)
-      localStorage.setItem("cart", JSON.stringify(this.values))
+    if(item.amount <= 0){
+        await element.parentNode.parentNode.parentNode.parentNode.parentNode.classList.add("hideItem")
+
+      setTimeout(() => {
+        const index = this.values.findIndex(i => i.id === id)
+        this.values = this.values.filter((_ , i) => i !== index)
+        localStorage.setItem("cart", JSON.stringify(this.values))
+        this.updateLocalCart()
+      }, 250);
     }
     else{
       this.values.map(i => { if(i.id == id){i.amount -= 1} })
