@@ -12,8 +12,14 @@ export class AppComponent implements AfterViewInit {
   constructor(private appService: AppService){}
   items: ItemsDTO[];
   values: LocalValues[];
+
+  amountItemsInCart: number;
+  displayItemCart: string;
+
   voidCart: string = null;
+
   @ViewChild("payBtn") payButton: ElementRef
+
 
   ngAfterViewInit(): void {
     this.updateLocalCart()
@@ -21,6 +27,8 @@ export class AppComponent implements AfterViewInit {
 
   updateLocalCart(){
     this.values = JSON.parse(localStorage.getItem("cart"))
+    this.items = this.values.map(i => this.appService.getOne(i.id, i.amount))
+    
     if(!this.values || this.values.length <= 0){
       this.voidCart = "You didn't choose anything"
       this.payButton.nativeElement.style.display = "none"
@@ -29,7 +37,15 @@ export class AppComponent implements AfterViewInit {
       this.voidCart = null
       this.payButton.nativeElement.style.display = "flex"
     }
-    this.items = this.values.map(i => this.appService.getOne(i.id, i.amount))
+
+    this.amountItemsInCart = this.values.length
+    if(this.amountItemsInCart == 0 || null)
+    {
+      this.displayItemCart = "none"
+    }
+    else{
+      this.displayItemCart = "flex"
+    }
   }
 
   addToCartOne(id: number){
