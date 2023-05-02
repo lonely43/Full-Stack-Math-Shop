@@ -36,7 +36,7 @@ export class AppComponent implements AfterViewInit {
     this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
     
     if(!this.values || this.values.length <= 0){
-      this.voidCart = "You didn't choose anything"
+      this.voidCart = "You chose nothing"
       this.payButton.nativeElement.style.display = "none"
     }
     else{
