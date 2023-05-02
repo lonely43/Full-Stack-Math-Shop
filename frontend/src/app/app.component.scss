@@ -195,10 +195,24 @@
                   h1{
                      font-size: 1.65rem;
                   }
-                  p{
+                  button{
                      position: absolute;
                      bottom: 0;
                      left: 0;
+
+                     width: auto;
+                     height: auto;
+
+                     color: rgb(224, 102, 102); 
+                     background-color: inherit;
+
+                     border: none;
+
+                     cursor: pointer;
+
+                     &:hover{
+                        color: rgb(255, 112, 112);
+                     }
                   }
                }
 

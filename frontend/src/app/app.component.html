@@ -33,7 +33,7 @@
           <div class="bodyItem">
             <div class="info">
               <h1> {{item.title}} </h1>
-              <p style="color: rgb(224, 102, 102); cursor: pointer;" (click)="removeFromCart(item.id ,$event.target)"> remove </p>
+              <button (click)="removeFromCart(item.id ,$event.target)"> remove </button>
             </div>
             <div class="controls">
               <div class="amountItem">
