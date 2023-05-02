@@ -4,6 +4,7 @@ export interface ItemsDTO{
    description: string,
    icon?: string,
    amount?: number,
+   price: number,
 }
 export interface LocalValues{
    id:number,

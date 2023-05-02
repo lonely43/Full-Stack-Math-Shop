@@ -7,7 +7,7 @@
 
    padding: 0.5rem;
 
-   border-bottom: 0.01rem solid rgb(222, 222, 222);
+   border-bottom: 0.1rem solid rgb(222, 222, 222);
    border-radius: 1rem;
    background-color: rgb(255, 255, 255);
 
@@ -36,13 +36,17 @@
       
          border: 0;
 
+         animation: show 0.6s ease;
+
          &::before{
+            animation: showMiniCart 0.6s ease;
+
             counter-reset: x var(--x);
             content: counter(x);
 
             position: absolute;
-            right: 0;
-            top: 0.4rem;
+            right: -0.3rem;
+            top: 0.2rem;
 
             display: var(--d);
 
@@ -107,6 +111,7 @@
 
       min-width: 23.5rem;
       height: 100%;
+      
       padding: 1.25rem;
 
       background-color: rgb(255, 255, 255);
@@ -278,7 +283,15 @@
       transform: translateX(0rem);
    }
 }
-
 .hideItem{
    transform: translateX(-100rem);
+}
+
+@keyframes showMiniCart {
+   0%{
+      transform: scale(0);
+   }
+   100%{
+      transform: scale(1);
+   }
 }

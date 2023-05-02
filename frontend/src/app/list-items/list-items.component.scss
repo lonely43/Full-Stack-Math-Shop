@@ -1,11 +1,14 @@
 .main{
+   margin-top: 4rem;
+
    width: 100%;
    height: auto;
    display: flex;
    flex-direction: column;
-   gap: 1rem;
+   gap: 3rem;
 
    .labelItems{
+      padding: 1.25rem;
       width: 100%;
       height: auto;
 
@@ -13,6 +16,30 @@
       align-items: center;
       text-align: center;
       justify-content: space-around;
+
+      background-color: rgb(255, 255, 255);
+      border-top: 0.1rem solid rgb(222, 222, 222);
+      border-bottom: 0.1rem solid rgb(222, 222, 222);
+
+      .info{
+         width: 100%;
+
+         display: flex;
+         align-items: center;
+         text-align: center;
+         justify-content: space-around;
+         gap: 2rem;
+
+         h1{
+            position: relative;
+
+            text-align: center;
+            font-size: 1.65em;
+            color: rgb(0, 0, 0);
+
+            text-shadow: 0 0 0.08rem black;
+         }
+      }
    }
 
    .bodyItems{
@@ -27,7 +54,7 @@
          min-height: 18rem;
 
          background-color: rgb(255, 255, 255);
-         border: 0.125rem solid rgb(222, 222, 222);
+         border: 0.1rem solid rgb(177, 177, 177);
          border-radius: 1rem;
 
 
