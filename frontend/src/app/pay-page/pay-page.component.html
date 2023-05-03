@@ -1,1 +1,37 @@
-<p>pay-page works!</p>
+<div class="main">
+   <div class="mainPay">
+      <div class="items">
+         <div *ngFor="let item of items" class="item">
+            <div class="labelItem">
+               <img src="../assets/1ab3629e6b30488670af89c498f289c4.jpg" alt="logo"> <!--[src]="item.icon"-->
+               <div class="info">
+                  <div class="text">
+                     <h1> {{item.title}} </h1>
+                     <p> {{item.description}} </p>
+                  </div>
+               </div>
+            </div>
+            <div class="bodyItem">
+               <div class="controls">
+                  <div class="amountItem">
+                     <svg (click)="addOne(item.id)" style="color:rgb(0, 0, 0); cursor:pointer" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                     </svg>
+   
+                     <h1 style="font-weight: 400;" oncopy="false" oncut="false" onpaste="false"> {{item.amount}} </h1>
+   
+                     <svg (click)="minOne(item.id)" style="color:rgb(0, 0, 0); cursor:pointer" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+                     </svg>
+                  </div>
+                  <button (click)="removeItem(item.id, $event.target)"> remove </button>
+               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pay">
+
+        </div>
+   </div>
+</div>

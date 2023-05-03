@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ItemsDTO } from './list-items/item.model';
+import { PayPageComponent } from './pay-page/pay-page.component';
 
 @Injectable({
   providedIn: 'root'
