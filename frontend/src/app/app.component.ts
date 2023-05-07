@@ -23,7 +23,7 @@ export class AppComponent implements AfterViewInit {
       }
     })
   }
-  
+
   items: ItemsDTO[];
   values: LocalValues[];
 
@@ -36,8 +36,10 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild("cart") cart: ElementRef
 
-  ngAfterViewInit(): void {
-    window.addEventListener("storage", () => console.log(1))
+  ngAfterViewInit(){
+    if(!localStorage.getItem("cart")){
+      localStorage.setItem("cart", "[]")
+    }
     this.updateLocalCart()
   }
 
@@ -48,7 +50,8 @@ export class AppComponent implements AfterViewInit {
     let totalpriceArray: number[] = this.values.map(i => i.amount * this.appService.getOne(i.id, i.amount).price)
     this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
     
-    if(!this.values || this.values.length <= 0){
+
+    if(!this.values || this.values.length <= 0 || this.values == null){
       this.voidCart = "You chose nothing"
       this.payButton.nativeElement.style.display = "none"
     }
@@ -56,6 +59,7 @@ export class AppComponent implements AfterViewInit {
       this.voidCart = null
       this.payButton.nativeElement.style.display = "flex"
     }
+
 
     this.amountItemsInCart = this.values.length
     if(this.amountItemsInCart == 0 || null)
@@ -94,8 +98,17 @@ export class AppComponent implements AfterViewInit {
     this.updateLocalCart()
   }
 
-  async removeFromCart(id: number, element: any){
-    await element.parentNode.parentNode.parentNode.parentNode.classList.add("hideItem")
+  async removeFromCart(id: number, element: any, anim: boolean = true){
+    if(anim)
+    {
+      await element.parentNode.parentNode.parentNode.parentNode.classList.add("hideItem")
+    }
+    else{
+      const index = this.values.findIndex(i => i.id === id)
+      this.values = this.values.filter((_ , i) => i !== index)
+      localStorage.setItem("cart", JSON.stringify(this.values))
+      return this.updateLocalCart()
+    }
 
     setTimeout(() => {
       const index = this.values.findIndex(i => i.id === id)

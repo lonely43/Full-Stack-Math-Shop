@@ -9,9 +9,11 @@
                      <h1> {{item.title}} </h1>
                      <p> {{item.description}} </p>
                   </div>
+                  <button (click)="removeItem(item.id, $event.target)"> remove </button>
                </div>
             </div>
             <div class="bodyItem">
+               <h1 class="totalPriceItem" > {{item.totalPrice}}$ </h1>
                <div class="controls">
                   <div class="amountItem">
                      <svg (click)="addOne(item.id)" style="color:rgb(0, 0, 0); cursor:pointer" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -24,14 +26,30 @@
                         <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
                      </svg>
                   </div>
-                  <button (click)="removeItem(item.id, $event.target)"> remove </button>
                </div>
             </div>
           </div>
         </div>
 
         <div class="pay">
-
+            <form>
+               <div class="inputArea">
+                  <div class="largeCol">
+                     <div class="col">
+                        <label for="FIRSTname">First name</label>
+                        <input type="text" id="FIRSTname">
+                     </div>
+                     <div class="col">
+                        <label for="LASTname">Last name</label>
+                        <input type="text" id="LASTname">
+                     </div>
+                  </div>
+               </div>
+               <div class="payInfo">
+                  <h1> {{totalPrice}}$ </h1>
+                  <button type="submit"> Pay </button>
+               </div>
+            </form>
         </div>
    </div>
 </div>

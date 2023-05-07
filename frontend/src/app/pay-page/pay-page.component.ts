@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ItemsDTO } from '../list-items/item.model';
+import { ItemsDTO, LocalValues } from '../list-items/item.model';
 import { AppComponent } from '../app.component';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-pay-page',
@@ -8,25 +9,38 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./pay-page.component.scss']
 })
 export class PayPageComponent implements AfterViewInit {
-  constructor(private appComponent: AppComponent){
+  constructor(private appService: AppService, private appComponent: AppComponent){
   }
 
-  items: ItemsDTO[] = this.appComponent.items
+  items: ItemsDTO[];
+  values: LocalValues[];
+  totalPrice: number;
 
   ngAfterViewInit(): void {
     this.updateItems()
   }
 
-  updateItems(){
-    this.items = this.appComponent.items
+  async updateItems(){
+    this.values = JSON.parse(localStorage.getItem("cart"))
+    this.items = this.values.map(i => this.appService.getOne(i.id, i.amount))
+    this.items.map(i => i.totalPrice = i.price * i.amount)
+ 
+    let totalpriceArray: number[] = this.values.map(i => i.amount * this.appService.getOne(i.id, i.amount).price)
+    this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
   }
-  addOne(id: number){
-    return this.appComponent.addToCartOne(id)
+
+  async addOne(id: number){
+    await this.appComponent.addToCartOne(id)
+    return this.updateItems()
   }
-  minOne(id: number){
-    return this.appComponent.minToCartOne(id)
+
+  async minOne(id: number){
+    await this.appComponent.minToCartOne(id)
+    return this.updateItems() 
   }
-  removeItem(id: number, element){
-    return this.appComponent.removeFromCart(id, element)
+  
+  async removeItem(id: number, element){
+    await this.appComponent.removeFromCart(id, element, false)
+    return this.updateItems()
   }
 }
