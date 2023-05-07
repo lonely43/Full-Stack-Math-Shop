@@ -135,26 +135,27 @@
          padding: 1rem;
          
          display: flex;
-         flex-direction: column;
-         justify-content: space-between;
+         justify-content: center;
 
-         border-left: 0.1rem solid rgb(222, 222, 222);;
+         flex-grow: 1;
+
+         border-left: 0.01rem solid rgb(222, 222, 222);;
 
          form{
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            align-content: space-between;
+            gap: 1rem;
 
             .inputArea{
-               display: flex;
-               flex-direction: column;
+               display: grid;
+               grid-template-columns: repeat(1, 1fr);
                gap: 1rem;
 
                .largeCol{
-                  width: 100%;
-
                   display: flex;
                   justify-content: space-between;
+                  gap: 4rem;
                }
 
                .col{
@@ -175,7 +176,7 @@
                      text-align: start;
                      font-size: 1em;
                         
-                     border: 0.02rem solid rgb(222, 222, 222);
+                     border: 0.01rem solid rgb(222, 222, 222);
                      border-radius: 0.4rem;
    
                      &:focus{
@@ -185,7 +186,31 @@
                }
             }
             .payInfo{
+               padding-top: 1rem;
+               border-top: 0.01rem solid rgb(222, 222, 222);
 
+               display: flex;
+               flex-direction: column;
+               flex-grow: 1;
+
+               button{
+                  padding: 0.8rem 1rem;
+
+                  text-align: center;
+                  font-size: 1.25em;
+                  font-weight: 400;
+                  color: rgb(255, 255, 255);
+
+                  background-color: rgb(137, 223, 134);
+
+                  border: none;
+                  border-radius: 1rem;
+
+                  &:hover{
+                     cursor: pointer;
+                     background-color: rgb(128, 212, 126);
+                  }
+               }
             }
          }
       }
