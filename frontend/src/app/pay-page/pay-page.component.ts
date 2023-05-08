@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ItemsDTO, LocalValues } from '../list-items/item.model';
 import { AppComponent } from '../app.component';
 import { AppService } from '../app.service';
@@ -16,6 +16,8 @@ export class PayPageComponent implements AfterViewInit {
   values: LocalValues[];
   totalPrice: number;
 
+  @ViewChild("mainPay") mainPay: ElementRef;
+
   ngAfterViewInit(): void {
     this.updateItems()
   }
@@ -27,6 +29,15 @@ export class PayPageComponent implements AfterViewInit {
  
     let totalpriceArray: number[] = this.values.map(i => i.amount * this.appService.getOne(i.id, i.amount).price)
     this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
+
+    if(!this.values || this.values.length <= 0 || this.values == null){
+      this.mainPay.nativeElement.display = "none"
+      console.log(this.mainPay.nativeElement.display)
+    }
+    else{
+      this.mainPay.nativeElement.display = "block"
+      console.log(this.mainPay.nativeElement.display)
+    }
   }
 
   async addOne(id: number){

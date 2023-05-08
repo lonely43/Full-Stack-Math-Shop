@@ -193,6 +193,10 @@
                      font-size: 1.65rem;
                   }
                   button{
+                     -webkit-user-select: none; /* Safari */
+                     -ms-user-select: none; /* IE 10 and IE 11 */
+                     user-select: none; /* Standard syntax */
+
                      position: absolute;
                      bottom: 0;
                      left: 0;
@@ -222,7 +226,12 @@
                   position: relative;
 
                   .amountItem{
+                     -webkit-user-select: none; /* Safari */
+                     -ms-user-select: none; /* IE 10 and IE 11 */
+                     user-select: none; /* Standard syntax */
+
                      margin-right: 1rem;
+                     
                      display: flex;
                      align-items: center;
                      justify-content: center;

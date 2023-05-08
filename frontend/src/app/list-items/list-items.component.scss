@@ -54,7 +54,7 @@
          min-height: 18rem;
 
          background-color: rgb(255, 255, 255);
-         border: 0.1rem solid rgb(177, 177, 177);
+         border: 0.1rem solid rgb(222, 222, 222);
          border-radius: 1rem;
 
 
@@ -103,12 +103,12 @@
 }
 
 @media screen and (min-width: 600px){
-  .bodyItems{ 
-   grid-template-columns: repeat(2, 1fr); 
+   .bodyItems{ 
+      grid-template-columns: repeat(2, 1fr); 
    }
 }
 @media screen and (min-width: 900px){
    .bodyItems{ 
-    grid-template-columns: repeat(3, 1fr); 
-    }
+      grid-template-columns: repeat(3, 1fr); 
+   }
  }
