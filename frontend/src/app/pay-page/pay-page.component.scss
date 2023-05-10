@@ -233,6 +233,29 @@
          }
       }
    }
+
+   .notExist{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+
+      button{
+         padding: 0.8rem 1rem;
+
+         font-size: 1em;
+         color: white;
+
+         border: none;
+         border-radius: 1rem;
+
+         background-color: black;
+
+         cursor: pointer;
+      }
+   }
 }
 
 @media screen and (max-width: 690px){

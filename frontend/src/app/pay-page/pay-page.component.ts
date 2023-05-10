@@ -16,7 +16,8 @@ export class PayPageComponent implements AfterViewInit {
   values: LocalValues[];
   totalPrice: number;
 
-  @ViewChild("mainPay") mainPay: ElementRef;
+  @ViewChild("pay") mainPay: ElementRef;
+  @ViewChild("ops") opsText: ElementRef;
 
   ngAfterViewInit(): void {
     this.updateItems()
@@ -31,12 +32,12 @@ export class PayPageComponent implements AfterViewInit {
     this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
 
     if(!this.values || this.values.length <= 0 || this.values == null){
-      this.mainPay.nativeElement.display = "none"
-      console.log(this.mainPay.nativeElement.display)
+      this.mainPay.nativeElement.style.display = "none"
+      this.opsText.nativeElement.style.display = "flex"
     }
     else{
-      this.mainPay.nativeElement.display = "block"
-      console.log(this.mainPay.nativeElement.display)
+      this.mainPay.nativeElement.style.display = "flex"
+      this.opsText.nativeElement.style.display = "none"
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="main">
-   <div #mainPay class="mainPay">
+   <div #pay class="mainPay">
       <div class="items">
          <div *ngFor="let item of items" class="item">
             <div class="labelItem">
@@ -69,5 +69,10 @@
                </div>
             </form>
         </div>
+   </div>
+
+   <div #ops class="notExist">
+      <h1> Ooops, your cart empty😢 </h1>
+      <button routerLink="/"> go to shop </button>
    </div>
 </div>
