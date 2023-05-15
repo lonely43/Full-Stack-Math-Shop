@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ItemsDTO, LocalValues } from './list-items/item.model';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent implements AfterViewInit {
     })
   }
 
-  items: ItemsDTO[];
+  items: any;
   values: LocalValues[];
 
   totalPrice: number;
@@ -43,14 +44,14 @@ export class AppComponent implements AfterViewInit {
     this.updateLocalCart()
   }
 
-  updateLocalCart(){
+  async updateLocalCart(){
     this.values = JSON.parse(localStorage.getItem("cart"))
-    this.items = this.values.map(i => this.appService.getOne(i.id, i.amount))
-
-    let totalpriceArray: number[] = this.values.map(i => i.amount * this.appService.getOne(i.id, i.amount).price)
-    this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
+    this.items = await Promise.all(this.values.map(i => lastValueFrom(this.appService.findOne(i.id))))
+    this.values.forEach((i,_) => this.items[_].amount = i.amount)
     
-
+    //let totalpriceArray: number[] = this.values.map(i => i.amount * this.appService.findOne(i.id).price)
+    //this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
+    
     if(!this.values || this.values.length <= 0 || this.values == null){
       this.voidCart = "You chose nothing"
       this.payButton.nativeElement.style.display = "none"
@@ -72,14 +73,13 @@ export class AppComponent implements AfterViewInit {
   }
 
   addToCartOne(id: number){
-    if(this.values.some(i => i.id == id))
+    const index = this.values.findIndex(i => i.id === id)
+    console.log(index)
+    if(index !== -1)
     {
-      this.values.filter(i =>{ 
-        if(i.id == id)
-          {
-            i.amount += 1
-          }})
-          localStorage.setItem("cart", JSON.stringify(this.values))
+      this.values[index].amount += 1
+      console.log(this.values[index])
+      localStorage.setItem("cart", JSON.stringify(this.values))
     }
     else{
       const item = {id: id, amount: 1}

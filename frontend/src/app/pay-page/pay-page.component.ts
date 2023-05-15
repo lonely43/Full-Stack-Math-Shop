@@ -25,11 +25,11 @@ export class PayPageComponent implements AfterViewInit {
 
   async updateItems(){
     this.values = JSON.parse(localStorage.getItem("cart"))
-    this.items = this.values.map(i => this.appService.getOne(i.id, i.amount))
+    //this.items = this.values.map(i => this.appService.findOne(i.id, i.amount))
     this.items.map(i => i.totalPrice = i.price * i.amount)
  
-    let totalpriceArray: number[] = this.values.map(i => i.amount * this.appService.getOne(i.id, i.amount).price)
-    this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
+    //let totalpriceArray: number[] = this.values.map(i => i.amount * this.appService.findOne(i.id, i.amount).price)
+    //this.totalPrice = totalpriceArray.reduce((a, b) => a + b, 0)
 
     if(!this.values || this.values.length <= 0 || this.values == null){
       this.mainPay.nativeElement.style.display = "none"

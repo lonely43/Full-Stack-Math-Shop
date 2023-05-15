@@ -1,69 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ItemsDTO } from './list-items/item.model';
-import { PayPageComponent } from './pay-page/pay-page.component';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  items: ItemsDTO[] = [
-    {
-      id: 1,
-      title: "Triangle",
-      description: "Very interesting and cool triangle",
-      icon: "triangle.png",
-      amount: 0,
-      price: 10,
-    },
-    {
-      id: 2,
-      title: "Snake",
-      description: "beautiful snake",
-      icon: "triangle.png",
-      amount: 0,
-      price: 5,
-    },
-    {
-      id: 3,
-      title: "Plant",
-      description: "Impossible plant",
-      icon: "triangle.png",
-      amount: 0,
-      price: 15,
-    },
-    {
-      id: 4,
-      title: "Pig",
-      description: "Cool Pig",
-      icon: "triangle.png",
-      amount: 0,
-      price: 4,
-    },
-    {
-      id: 5,
-      title: "Cube",
-      description: "Very interesting cube",
-      icon: "triangle.png",
-      amount: 0,
-      price: 32,
-    },
-    {
-      id: 6,
-      title: "Box",
-      description: "Very cool box",
-      icon: "triangle.png",
-      amount: 0,
-      price: 2,
-    },
-  ]
+  constructor(private http: HttpClient){}
 
-  getItems(){
-    return this.items
+  findAll(){
+    return this.http.get('http://localhost:3000/items/findAll')
   }
   
-  getOne(id: number, amount:number){
-    let item = this.items.find((e) => e.id === id)
-    item.amount = amount
-    return item
+  findOne(id: number){
+    return this.http.get(`http://localhost:3000/items/findOne/${id}`)
   }
 }

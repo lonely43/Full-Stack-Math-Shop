@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ItemsDTO } from './item.model';
+import { AfterViewInit, Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { AppComponent } from '../app.component';
 
@@ -8,15 +7,16 @@ import { AppComponent } from '../app.component';
   templateUrl: './list-items.component.html',
   styleUrls: ['./list-items.component.scss']
 })
-export class ListItemsComponent {
-  items: ItemsDTO[];
+export class ListItemsComponent implements AfterViewInit {
+  items: any
 
-  constructor(private appService: AppService, private appComponent: AppComponent) {
-    this.items = appService.getItems()
+  constructor(private appService: AppService, private appComponent: AppComponent) {}
+
+  ngAfterViewInit(){
+    this.appService.findAll().subscribe(data => this.items = data);
   }
+
   addToCartOne(id: number){
-   // localStorage.setItem("cart", JSON.stringify([...JSON.parse(localStorage.getItem("cart")?? "[]"), id]))
     this.appComponent.addToCartOne(id)
-    //this.appComponent.updateLocalCart()
   }
 }
